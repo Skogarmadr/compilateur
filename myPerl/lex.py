@@ -15,7 +15,7 @@ tokens = (
     'NUMBER',
     'ADD_OP',
     'MUL_OP',
-	'LETTER'
+    'MOD_OP'
 )
 
 literals = '()'
@@ -24,8 +24,17 @@ def t_ADD_OP(t):
     r'\+|-'
     return t
 
+<<<<<<< HEAD:lex.py
 def t_MUL_OP(t):
     r'\*|/'
+=======
+
+def t_MUL_OP(t):
+    r'\*|/'
+    return t
+
+def t_MOD_OP(t):
+    r'\%'
     return t
 
 def t_NUMBER(t):
