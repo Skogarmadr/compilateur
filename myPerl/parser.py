@@ -13,7 +13,8 @@ operations = {
 precedence = (
     ('left', 'ADD_OP'),
     ('left', 'MOD_OP'),
-    ('left', 'MUL_OP')
+    ('left', 'MUL_OP'),
+    ('right', 'UMINUS')
 )
 
 
@@ -28,10 +29,13 @@ def p_expression_addop(p):
     | expression MOD_OP expression'''
     p[0] = operations[p[2]](p[1], p[3])
 
-
 def p_expression_par(p):
     """expression : '(' expression ')'"""
     p[0] = p[2]
+
+def p_minus(p):
+    """expression : ADD_OP expression %prec UMINUS"""
+    p[0] = operations[p[1]](0, p[2])
 
 
 def p_error(p):

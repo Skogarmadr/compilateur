@@ -1,41 +1,41 @@
 import ply.lex as lex
 
 reserved_words = (
-	'if',
-	'else',
-	'elseif',
-	'foreach',
-	'for',
-	'while',
-	'sub',
-	'print',
+    'else',
+    'elseif',
+    'for',
+    'foreach',
+    'if',
+    'print',
+    'sub',
+    'while'
 )
 
 tokens = (
-    'NUMBER',
     'ADD_OP',
-    'MUL_OP',
-    'MOD_OP'
+    'COMMENT',
+    'NUMBER',
+    'MOD_OP',
+    'MUL_OP'
 )
 
 literals = '()'
+
 
 def t_ADD_OP(t):
     r'\+|-'
     return t
 
-<<<<<<< HEAD:lex.py
-def t_MUL_OP(t):
-    r'\*|/'
-=======
 
 def t_MUL_OP(t):
     r'\*|/'
     return t
+
 
 def t_MOD_OP(t):
     r'\%'
     return t
+
 
 def t_NUMBER(t):
     r'\d+(\.\d+)?'
@@ -46,7 +46,13 @@ def t_NUMBER(t):
         t.value = 0
     return t
 
-	
+
+# Exclure les commentaires du codes
+def t_COMMENT(t):
+    r'\#.*'
+    pass
+
+
 def t_newline(t):
     r'\n+'
     t.lexer.lineno += len(t.value)
